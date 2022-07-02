@@ -18,26 +18,40 @@ function HomeScreen({ navigation }) {
     );
   }
 
+
+  function resetColor() {
+    setColorArray([]);
+  }
+
   function addColor() {
     setColorArray([
-      ...colorArray,
+
       {
         red: Math.floor(Math.random() * 256),
         green: Math.floor(Math.random() * 256),
         blue: Math.floor(Math.random() * 256),
         id: `${colorArray.length}`,
       },
+      ...colorArray,
+
     ]);
   }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={{ height: 40, justifyContent: "center" }}
+        style={styles.appButtonContainer}
         onPress={addColor}
       >
-        <Text style={{ color: "red" }}>Add colour</Text>
+        <Text style={styles.appButtonText}>Add colour</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.resetButtonContainer}
+        onPress={resetColor}
+      >
+        <Text style={styles.resetButtonText}>Reset colour</Text>
+      </TouchableOpacity>
+
       <FlatList style={styles.list} data={colorArray} renderItem={renderItem} />
     </View>
   );
@@ -89,6 +103,37 @@ const styles = StyleSheet.create({
   detailText: {
     fontSize: 24,
     marginBottom: 20,
+  },
+  appButtonContainer: {
+    marginTop: 10,
+    elevation: 8,
+    backgroundColor: "#009688",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  appButtonText: {
+    fontSize: 14,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  },
+  resetButtonContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+    elevation: 8,
+    backgroundColor: "#ccc",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  resetButtonText: {
+    fontSize: 14,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
   },
 });
 
