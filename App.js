@@ -52,7 +52,7 @@ function HomeScreen({ navigation }) {
         <Text style={styles.resetButtonText}>Reset colour</Text>
       </TouchableOpacity>
 
-      <FlatList style={styles.list} data={colorArray} renderItem={renderItem} />
+      <FlatList style={styles.list} data={colorArray} renderItem={renderItem} numColumns={6} />
     </View>
   );
 }
@@ -96,9 +96,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+
   },
   list: {
-    width: "100%",
+    // width: "100%",
   },
   detailText: {
     fontSize: 24,
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     elevation: 8,
-    backgroundColor: "#ccc",
+    backgroundColor: "grey",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12
