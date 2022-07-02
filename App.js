@@ -1,12 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import BlockRGB from "./BlockRGB";
+import { Button } from "react-native-web";
 
 function HomeScreen({ navigation }) {
   const [colorArray, setColorArray] = useState([]);
+
+
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (<Button onPress={addColor} title="Add Colour" />),
+      headerLeft: () => (<Button onPress={resetColor} title="Reset Colour" />),
+    });
+
+
+  });
 
   function renderItem({ item }) {
     return (
@@ -39,7 +51,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.appButtonContainer}
         onPress={addColor}
       >
@@ -50,7 +62,7 @@ function HomeScreen({ navigation }) {
         onPress={resetColor}
       >
         <Text style={styles.resetButtonText}>Reset colour</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <FlatList style={styles.list} data={colorArray} renderItem={renderItem} numColumns={6} />
     </View>
@@ -79,11 +91,14 @@ function DetailsScreen({ route }) {
 
 const Stack = createStackNavigator();
 
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Colour List" component={HomeScreen} />
+      <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
+        <Stack.Screen name="Colour List" component={HomeScreen}
+
+        />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
